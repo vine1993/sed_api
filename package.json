@@ -2,9 +2,20 @@
   "name": "sed_api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --no-notify src/index.ts"
+    "dev": "ts-node-dev --transpile-only --no-notify index.ts",
+    "generate": "ts-node-dev src/schema/schema.ts",
+    "test" : "yarn generate && jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {"warnOnly": true}
+      }
+    },
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
