@@ -1,10 +1,10 @@
 import express from 'express';
 import {graphqlHTTP} from "express-graphql";
-import { schema } from "./schema/schema";
+import { index } from "./schema/schema";
 
 const server = express();
 server.use('/graphql',graphqlHTTP({
-  schema: schema,
+  schema: index,
   rootValue: () => 'Hello World',
   graphiql: true
 }))
