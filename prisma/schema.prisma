@@ -10,7 +10,7 @@ generator client {
 model Admin {
     id Int @id @default(autoincrement())
     name String
-    password string
+    password String
     email String?
 }
 

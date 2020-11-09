@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify index.ts",
     "generate": "ts-node-dev src/schema/schema.ts",
-    "test": "yarn generate && jest"
+    "test": "yarn generate && jest",
+    "migrate:save": "npx prisma migrate save --experimental",
+    "migrate:up": "npx prisma migrate up --experimental"
   },
   "jest": {
     "preset": "ts-jest",
