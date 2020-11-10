@@ -1,3 +1,3 @@
 import {server} from './src/server';
 
-server.listen(8000);
+server.listen(process.env.PORT);
