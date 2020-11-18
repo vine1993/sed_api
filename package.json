@@ -5,10 +5,12 @@
   "main": "index.ts",
   "scripts": {
     "dev": "NODE_ENV=dev ts-node-dev --transpile-only --no-notify index.ts",
+    "test": "yarn nexus:reflection && jest --watch",
     "generate": "ts-node-dev src/schema.ts",
-    "test": "NODE_ENV=test yarn generate && jest",
     "migrate:save": "npx prisma migrate save --experimental",
-    "migrate:up": "npx prisma migrate up --experimental"
+    "migrate:up": "npx prisma migrate up --experimental",
+    "nexus:reflection": "ts-node src/schema.ts",
+    "postinstall": "yarn generate"
   },
   "jest": {
     "preset": "ts-jest",
@@ -41,15 +43,18 @@
     "graphql": "^15.4.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.10.2",
+    "@prisma/cli": "^2.11.0",
     "@types/express": "^4.17.8",
     "@types/get-port": "^4.2.0",
     "@types/jest": "^26.0.15",
+    "@types/mysql": "^2.15.15",
     "@types/node": "^14.14.6",
     "get-port": "^5.1.1",
     "graphql-request": "^3.3.0",
     "http": "^0.0.1-security",
     "jest": "^26.6.3",
+    "mysql": "^2.18.1",
+    "nanoid": "^3.1.16",
     "ts-jest": "^26.4.3",
     "ts-node-dev": "^1.0.0",
     "typescript": "^4.0.5"

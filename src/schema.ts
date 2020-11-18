@@ -1,6 +1,5 @@
-import { makeSchema } from "@nexus/schema";
+import { makeSchema, connectionPlugin } from "@nexus/schema";
 import { join } from 'path';
-
 import * as typeDefs from './schemas';
 
 
@@ -19,4 +18,7 @@ export const schema = makeSchema({
         ],
         contextType: 'ContextModule.Context'
     },
+    plugins: [
+        connectionPlugin()
+    ]
 })

@@ -1,28 +1,22 @@
 import express from 'express';
 import {graphqlHTTP} from "express-graphql";
-import { schema } from "./schema";
 import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
 
-const findEnv = () => {
-  let file = '.env';
-  switch(process.env.NODE_ENV){
-    case 'test':
-      file = '.env.test';
-    break;
-    case 'dev':
-      file = '.env.local';
-      break;
-  }
-  return file;
-}
+import { schema } from "./schema";
+import {Db} from './db';
 
-dotenv.config({path:findEnv()});
+let envPath = path.resolve(__dirname,`../.env.${process.env.NODE_ENV}`)
+if(!fs.existsSync(envPath)) envPath = '../.env'
+
+dotenv.config({path:envPath});
 
 const server = express();
 server.use('/graphql',graphqlHTTP({
   schema: schema,
-  rootValue: () => 'Hello World',
-  graphiql: true
+  graphiql: true,
+  context: {db:Db}
 }))
 
 export {server};

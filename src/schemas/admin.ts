@@ -1,5 +1,4 @@
 import {objectType, extendType, stringArg} from "@nexus/schema";
-import {query} from "express";
 
 export const Admin = objectType({
     name: 'Admin',
@@ -14,12 +13,12 @@ export const Admin = objectType({
 export const AdminQuery = extendType({
     type: 'Query',
     definition(t) {
-        t.field('Admins',{
+        t.field('adminList',{
             nullable:true,
             type:'Admin',
             list:true,
-            resolve(_root,_args,ctx){
-                return [];
+            async resolve(_root,args,ctx){
+                return await ctx.db.admin.findMany();
             }
         })
     }
@@ -28,15 +27,16 @@ export const AdminQuery = extendType({
 export const AdminMutation = extendType({
     type: 'Mutation',
     definition(t) {
-        t.field('AdminCreate',{
+        t.field('adminCreation',{
             type: 'Admin',
             nullable:false,
             args: {
-              name: stringArg({required:true}),
-              password: stringArg({required:true})
+                name: stringArg({required:true}),
+                password: stringArg({required:true})
             },
-            resolve(_root,args,ctx){
-                return {id:1};
+            async resolve(_root,args,ctx){
+                const Admin = await ctx.db.admin.create({data:args});
+                return {id:Admin.id};
             }
         })
     }
