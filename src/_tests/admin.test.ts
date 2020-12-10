@@ -26,6 +26,6 @@ describe('Admin', () => {
         `;
 
         const result = await ctx.client.request(mutation)
-        expect(result).toMatchObject({adminCreation:{id:expect.any(Number)}})
+        expect(result).toMatchObject({adminCreation:{id:expect.any(String)}})
     })
 })

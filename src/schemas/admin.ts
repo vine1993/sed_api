@@ -1,9 +1,18 @@
-import {objectType, extendType, stringArg} from "@nexus/schema";
+import {objectType, extendType, stringArg, interfaceType} from "@nexus/schema";
+
+const Node = interfaceType({
+    name: 'Node',
+    definition(t) {
+        t.id('id',{description:'Node ID'})
+        t.resolveType(() => null)
+    }
+})
 
 export const Admin = objectType({
     name: 'Admin',
     definition(t) {
-        t.int('id')
+        t.implements(Node)
+        t.id('id')
         t.string('name')
         t.string('password')
         t.string('email',{ nullable: true })
